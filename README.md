@@ -2,6 +2,7 @@
 `main.tf` - main file. reference required providers and s3 bucket, s3 bucket was created manually
 `providers.tf` - additional options for providers
 `github_iam.tf` - file to create gihub action role, set it's permissions. And set OIDC auth.
+`variables.tf` - file with variables
 
 # Github Actions
 `terraform.yml` contains 3 jobs:
