@@ -11,6 +11,5 @@ terraform {
     key                = "state/terraform.tfstate"
     region         	   = "eu-north-1"
     encrypt        	   = true
-    profile            = "mdfst_61"
   }
 }
