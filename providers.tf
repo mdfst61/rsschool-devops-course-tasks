@@ -1,4 +1,4 @@
 provider "aws" {
   region  = "eu-north-1"
-  profile = "mdfst_61"
+#  profile = "xxx"
 }
