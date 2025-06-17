@@ -12,6 +12,9 @@ permissions:
   contents: read
   id-token: write
 
+env:
+  TF_VAR_aws_profile: ""
+
 jobs:
   terraform-check:
     name: "Terraform Format Check"
