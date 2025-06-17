@@ -5,11 +5,4 @@ terraform {
       version = "~> 4.18.0"
     }
   }
-
-  backend "s3" {
-    bucket  = "mdfst-rsschool-devops2025"
-    key     = "state/terraform.tfstate"
-    region  = var.region
-    encrypt = true
-  }
 }
