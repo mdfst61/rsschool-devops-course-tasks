@@ -7,9 +7,9 @@ terraform {
   }
 
   backend "s3" {
-    bucket         	   = "mdfst-rsschool-devops2025"
-    key                = "state/terraform.tfstate"
-    region         	   = var.region
-    encrypt        	   = true
+    bucket  = "mdfst-rsschool-devops2025"
+    key     = "state/terraform.tfstate"
+    region  = var.region
+    encrypt = true
   }
 }
