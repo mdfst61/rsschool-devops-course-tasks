@@ -1,0 +1,17 @@
+#cloud-config
+preserve_hostname: false
+hostname: ${hostname}
+package_update: true
+packages:
+  - nc
+runcmd:
+  - |
+    curl -sfL https://get.k3s.io | \
+      INSTALL_K3S_EXEC="--token ${k3s_token} \
+                       --node-name ${hostname}" \
+      sh -
+
+  # 2. (Optional) make the kubeconfig usable from outside the box
+  - |
+    PRIVATE_IP=`hostname -I | awk '{print $1}'`
+    sed -i "s/127.0.0.1/$${PRIVATE_IP}/" /etc/rancher/k3s/k3s.yaml

@@ -1,0 +1,14 @@
+#cloud-config
+hostname: ${hostname}
+preserve_hostname: false
+package_update: true
+packages:
+  - nc
+runcmd:
+  - ["bash", "-c", "until nc -z ${server_ip} 6443; do sleep 2; done"]
+  - |
+    curl -sfL https://get.k3s.io | \
+      K3S_URL="https://${server_ip}:6443" \
+      K3S_TOKEN="${k3s_token}" \
+      INSTALL_K3S_EXEC="--node-name ${hostname}" \
+      sh -

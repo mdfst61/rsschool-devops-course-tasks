@@ -7,3 +7,8 @@ resource "aws_key_pair" "bastion" {
   key_name   = "bastion-key"
   public_key = tls_private_key.bastion.public_key_openssh
 }
+
+resource "random_password" "k3s_token" {
+  length  = 24
+  special = false
+}
