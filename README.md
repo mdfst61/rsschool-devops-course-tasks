@@ -27,3 +27,12 @@
 - terraform-check - runs terraform fmt
 - terraform-plan  - runs terraform plan, requires terraform-check completion. Uses OIDC for AWS auth
 - terraform-apply - runs terraform apply, requires terraform-plan completion. Uses OIDC for AWS auth
+
+
+# K3S cluster instalation 
+within `keys.tf` we create `k3s_token` to make sure we control it's value for future use
+`_CLOUD_INIT/` - files within this directory are used to bootstrap cluster on control-plane node 
+and to connect worker node in the cluster using `k3s_token` create above. Later we use it as user_data for k3s instances
+`ec2_k8s.tf` - file with k3s instances
+### notes about k3s cluster
+I had to add swap file on control-plane node due to CPU issues.
