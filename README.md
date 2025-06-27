@@ -36,3 +36,5 @@ and to connect worker node in the cluster using `k3s_token` create above. Later 
 `ec2_k8s.tf` - file with k3s instances
 ### notes about k3s cluster
 I had to add swap file on control-plane node due to CPU issues.
+
+Bastion host was configured before within `ec2_bastion.tf` 

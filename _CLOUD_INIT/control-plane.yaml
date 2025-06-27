@@ -4,14 +4,18 @@ hostname: ${hostname}
 package_update: true
 packages:
   - nc
+
+bootcmd: #otherwise the control-node is overloaded
+  - |
+    fallocate -l 2G /swapfile &&
+    chmod 600 /swapfile &&
+    mkswap /swapfile &&
+    echo '/swapfile none swap sw 0 0' >> /etc/fstab &&
+    swapon /swapfile
+
 runcmd:
   - |
     curl -sfL https://get.k3s.io | \
       INSTALL_K3S_EXEC="--token ${k3s_token} \
                        --node-name ${hostname}" \
       sh -
-
-  # 2. (Optional) make the kubeconfig usable from outside the box
-  - |
-    PRIVATE_IP=`hostname -I | awk '{print $1}'`
-    sed -i "s/127.0.0.1/$${PRIVATE_IP}/" /etc/rancher/k3s/k3s.yaml
