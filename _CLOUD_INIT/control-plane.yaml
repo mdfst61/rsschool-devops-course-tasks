@@ -1,0 +1,21 @@
+#cloud-config
+preserve_hostname: false
+hostname: ${hostname}
+package_update: true
+packages:
+  - nc
+
+bootcmd: #otherwise the control-node is overloaded
+  - |
+    fallocate -l 2G /swapfile &&
+    chmod 600 /swapfile &&
+    mkswap /swapfile &&
+    echo '/swapfile none swap sw 0 0' >> /etc/fstab &&
+    swapon /swapfile
+
+runcmd:
+  - |
+    curl -sfL https://get.k3s.io | \
+      INSTALL_K3S_EXEC="--token ${k3s_token} \
+                       --node-name ${hostname}" \
+      sh -
