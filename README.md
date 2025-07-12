@@ -38,3 +38,13 @@ and to connect worker node in the cluster using `k3s_token` create above. Later 
 I had to add swap file on control-plane node due to CPU issues.
 
 Bastion host was configured before within `ec2_bastion.tf` 
+
+# Minikube and Jenkins
+1 install and run  minikube
+2 install helm
+3 deploy jenkins:
+helm repo add jenkins https://charts.jenkins.io
+helm repo update
+kubectl apply -f pv.yml
+kubectl apply -f ns.yml
+helm install jenkins jenkins/jenkins -f jenkins-values.yml

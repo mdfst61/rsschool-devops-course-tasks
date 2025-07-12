@@ -1,0 +1,28 @@
+controller:
+  admin:
+    # -- Admin username created as a secret if `controller.admin.createSecret` is true
+    username: "admin"
+    # -- Admin password created as a secret if `controller.admin.createSecret` is true
+    # @default -- <random password>
+    password:
+    createSecret: true
+  installPlugins:
+    - job-dsl:1.87
+  JCasC:
+    defaultConfig: true
+    configScripts:
+      hello-job: |
+        jobs:
+          - script: >
+              freeStyleJob('HelloWorld') {
+                description('writes hello world to the log')
+                steps {
+                  shell('echo "Hello world"')
+                }
+              }
+
+persistence:
+  # -- Enable the use of a Jenkins PVC
+  enabled: true
+  existingClaim: jenkins-pvc
+  size: "1Gi"
